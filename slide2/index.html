@@ -21,7 +21,9 @@
                 });
            }
 
-            $('#image').setTimeout(slide, 3000);
+            setTimeout(function(){
+            	$('#image').click(slide)
+            }, 2000);
         </script>
     </body>
 </html>
