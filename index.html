@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Javascript Homework</title>
+	</head>
+	<body>
+		<ul id="list">
+		</ul>
+	</body>
+	<script>
+		var assignment = [
+			'about',
+			'madlib',
+			'loop',
+			'if',
+			'slide2'
+		]
+		for (var i = 0; i < assignment.length; i++) {
+			var list = assignment[i];
+			var id = document.getElementById('list');
+			var link = document.createElement('a');
+			link.appendChild(document.createTextNode(list));
+			link.href = list + '/index.html';
+			var insertli = document.createElement('li');
+			insertli.appendChild(link);
+			id.appendChild(insertli);
+		};
+	</script>
+</html>
