@@ -6,44 +6,53 @@
         <style>body{margin: 0;}</style>
     </head>
     <body>
-        <img id="image" src="images/1.jpg" alt="" >
+        <div id="pictures"></div>
         <script src="jquery-1.11.0.js"></script>
+        <script src="flickr.js"></script>
         <script>
-            var images =[
-            {
-                src:'images/1.jpg',
-                width:800,
-                height:600
-            },{
-                src:'images/2.jpg',
-                width:800,
-                height:600
-            },{
-                src:'images/3.jpg',
-                width:800,
-                height:600
-            },{
-                src:'images/4.jpg',
-                width:800,
-                height:600
-            },{
-                src:'images/5.jpg',
-                width:800,
-                height:600
-            }
-            ];
+        
+        var flickr = new Flickr('8e293eb5bc01282cc363187cfb4c954a');
+        
+        var images;
+        var num=0;
+	 		
+		flickr.photos.search(
+		{text: 'Yellowstone',
+		 extras: 'o_dims'
+		},function(a){
+			
+			images = a.photos.photo;
+
+            $('#pictures').html('<img src="' + images[0].src('b') +'" />');
+			
+			var num =0;
+            var max =images.length - 1;
             
-            function resizeImage(){
+            resizeImage();
+			
+           $('#pictures').click(function(){
+                num++;
+                if(num > max){
+                    num = 0;
+                }
+                var image = images[num];
+                $('#pictures').html('<img src="' + image.src('b') +'" />');
+            resizeImage();
+            });
+		});
+		$(window).resize(resizeImage);
+            
+        function resizeImage(){
                 var image =  images[num];
-                var ratio = image.width / image.height;
+                var ratio = image.o_width / image.o_height;
                 var width = $(window).width();
                 var height = width / ratio;
-                $('#image').css('width', width);
-                $('#image').css('height',height);
+                $('#pictures img').css('width', width);
+                $('#pictures img').css('height',height);
            }
-
-            var num =0;
-            var max = images.length -1;
+/*
+            var num =1;
+            var max =5;
 
             resizeImage();
            $('#image').click(function(){
@@ -55,23 +64,8 @@
                 this.src = image.src;
                 resizeImage();
             });
-            $(window).resize(resizeImage);
+            $(window).resize(resizeImage);*/
 
-           
-           
-           // Trying to autoload, not working 
-            /*function slide(){
-                num++;
-                if(num > max){
-                    num =1;
-                }
-                var image = 'images/' + num +'.jpg';
-                this.src = image;
-            }
-
-            setTimeout(function(){
-                $('#image').click(slide);
-            },1000);*/
 
         </script>
     </body>
