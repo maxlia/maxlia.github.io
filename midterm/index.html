@@ -18,7 +18,8 @@
 	 		
 		flickr.photos.search(
 		{text: 'Yellowstone',
-		 extras: 'o_dims'
+		 extras: 'o_dims',
+		 has_geo: 'yellowstone'
 		},function(a){
 			
 			images = a.photos.photo;
@@ -31,13 +32,15 @@
             resizeImage();
 			
            $('#pictures').click(function(){
-                num++;
+                $('#pictures').fadeOut(100, function(){num++;
                 if(num > max){
                     num = 0;
                 }
                 var image = images[num];
                 $('#pictures').html('<img src="' + image.src('b') +'" />');
-            resizeImage();
+           		resizeImage();
+            	$('#pictures').fadeIn(100);
+            });
             });
 		});
 		$(window).resize(resizeImage);
@@ -50,22 +53,7 @@
                 $('#pictures img').css('width', width);
                 $('#pictures img').css('height',height);
            }
-/*
-            var num =1;
-            var max =5;
-
-            resizeImage();
-           $('#image').click(function(){
-                num++;
-                if(num > max){
-                    num =0;
-                }
-                var image = images[num];
-                this.src = image.src;
-                resizeImage();
-            });
-            $(window).resize(resizeImage);*/
-
+		
 
         </script>
     </body>
