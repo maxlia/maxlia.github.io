@@ -7,6 +7,7 @@
     </head>
     <body>
         <div id="pictures"></div>
+        <div id="back"> < </div>
         <script src="jquery-1.11.0.js"></script>
         <script src="flickr.js"></script>
         <script>
@@ -22,28 +23,39 @@
 		 has_geo: 'yellowstone'
 		},function(a){
 			
-			images = a.photos.photo;
+				images = a.photos.photo;
 
-            $('#pictures').html('<img src="' + images[0].src('b') +'" />');
+				$('#pictures').html('<img src="' + images[0].src('b') +'" />');
 			
-			var num =0;
-            var max =images.length - 1;
-            
-            resizeImage();
+				var num =0;
+				var max =images.length - 1;
 			
-           $('#pictures').click(function(){
-                $('#pictures').fadeOut(100, function(){num++;
-                if(num > max){
-                    num = 0;
-                }
-                var image = images[num];
-                $('#pictures').html('<img src="' + image.src('b') +'" />');
-           		resizeImage();
-            	$('#pictures').fadeIn(100);
-            });
+				resizeImage();
+			
+			   $('#pictures').click(function(){
+					$('#pictures').fadeOut(100, function(){
+					num++;
+					if(num > max){
+						num = 0;
+					}
+					var image = images[num];
+					$('#pictures').html('<img src="' + image.src('b') +'" />');
+					resizeImage();
+					$('#pictures').fadeIn(100);
+				
+					$('#back').click(function(){
+						var backImg = num--;
+						var image = images[backImg];
+						$('#pictures').html('<img src="' + image.src('b') +'" />');
+						resizeImage();
+					});
+					
+				});
             });
 		});
 		$(window).resize(resizeImage);
+		
+		
             
         function resizeImage(){
                 var image =  images[num];

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Slideshow</title>
+        <style>
+        body{margin: 0; padding: 0}
+        #search{position: fixed; height: 31px; width: 250px; background: rgba(2,73,89,0.9); z-index: 1000; text-align: center; padding-top: 9px; box-shadow: 0 0 5px #404040;}
+        #search button{background: #FC822A; border:none; padding: 2px 10px; color: #fff; cursor: pointer;}
+        #pictures{overflow: hidden; background: #000;}
+        #pictures ul li img{margin: 0;padding: 0;}
+        #pictures ul{margin: 0; padding: 0; list-style: none;}
+        #pictures ul li{display: inline-block; overflow: hidden; margin: -5px 0 0 0;} 
+        </style>
+    </head>
+    <body>
+        <div id="search">
+            <input type="text" name="inputText" value="Text">
+            <button type="button" id="go">Go</button>
+        </div>
+        <div id="pictures">
+            <ul></ul>
+        </div>
+         <script src="jquery-1.11.0.js"></script>
+        <script src="flickr.js"></script>
+        <script>
+        var theLeft = $(window).width()/2 - 125;
+        var theTop = $(window).height()/2 - 20;
+        var theWidth = $(window).width();
+        var theHeight = $(window).height();
+        $('#pictures').css('width', theWidth);
+        $('#pictures').css('height',theHeight);
+        $('#search').css('top',theTop);
+        $('#search').css('left',theLeft);
+        var g, image, imageWidth, imageHeight;  
+        onload=function(){    
+            var who=$("input[name=inputText]")[0];
+            g=who.value;
+            who.onchange=arguments.callee;
+            $('#go').click(function(){
+                location.reload();
+            }); 
+
+            var flickr = new Flickr('8e293eb5bc01282cc363187cfb4c954a');
+            
+            var images, x, i;
+           // var num=0;
+
+    		flickr.photos.search(
+    		{text: g,
+    		 extras: 'o_dims'
+             },function(a){
+                images = a.photos.photo;
+                i=0;
+                var blockSize = $(window).width()/12;
+                while(i<100){
+                    $('#pictures ul').append('<li class="block"><img src="' + images[i].src('b') +'" /></li>');
+                    i++;
+                    $('#pictures ul li img').each(function(i){
+                        image = images[i];
+                        imageWidth = this.clientWidth;
+                        imageHeight = this.clientHeight;
+                        if(imageWidth > imageHeight){
+                            $(this).attr('height',blockSize);
+                        }else{
+                            $(this).attr('width',blockSize);
+                        };   
+                    });                 
+    			};
+                
+                $('.block').css('width',blockSize);
+                $('.block').css('height',blockSize);
+    			/*var num =0;
+                var max =images.length - 1;
+                
+                resizeImage();
+    			
+               $('#pictures').click(function(){
+                    $('#pictures').fadeOut(100, function(){num++;
+                    if(num > max){
+                        num = 0;
+                    }
+                    var image = images[num];
+                    $('#pictures').html('<img src="' + image.src('b') +'" />');
+               		resizeImage();
+                	$('#pictures').fadeIn(100);
+                });
+                });*/
+    		});
+
+		//$(window).resize(resizeImage);
+        /*function resizeImage(){
+                var image =  images[num];
+                var ratio = image.o_width / image.o_height;
+                var width = $(window).width();
+                var height = width / ratio;
+                $('#pictures img').css('width', width);
+                $('#pictures img').css('height',height);
+           }*/
+		
+        };       
+        
+        </script>
+
+    </body>
+</html>
