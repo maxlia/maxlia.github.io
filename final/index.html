@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>New York Times Headline</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link href='http://fonts.googleapis.com/css?family=Vollkorn:400,400italic,700' rel='stylesheet' type='text/css'>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="content">
+			<ul>
+				<li>
+					<img src="images/052114.jpg">
+					<h1>May 21, 2014</h1>
+					<div class="detial">
+						<h1>A Lion Still Roars, With Gratitude </h1>
+						<h1>Larry Kramer Lives to See His ‘Normal Heart’ Filmed for TV</h1>
+						<img src="images/052114.jpg">
+						<p>After decades of fighting against AIDS and for Hollywood’s attention in that fight, Larry Kramer is about to reach his largest audience with a film version of his play “The Normal Heart.”</p>
+					</div>
+				</li>
+				<li>
+					<img src="images/051814.jpg">
+					<h1>May 18, 2014</h1>
+					<div class="detial">
+						<h1>Deep Ties, Tested on Mexico’s Border</h1>
+						<p></p>
+					</div>
+				</li>
+				<li>
+					<img src="images/051714.jpg">
+					<h1>May 17, 2014</h1>
+					<div class="detial">
+						<h1>Jane Kleeb vs. the Keystone Pipeline</h1>
+						<p></p>
+					</div>
+				</li>
+				<li>
+					<img src="images/051614.jpg">
+					<h1>May 16, 2014</h1>
+					<div class="detial">
+						<h1>India’s Opposition Leader Sweeps Into Power</h1>						
+						<p></p>
+					</div>
+				</li>
+				<li>
+					<img src="images/051514.jpg">
+					<h1>May 15, 2014</h1>
+					<div class="detial">
+						<h1>Obama Dedicates 9/11 Memorial Museum</h1>
+						<p></p>
+					</div>
+				</li>
+				<li>
+					<img src="images/051414.jpg">
+					<h1>May 14, 2014</h1>
+					<div class="detial">
+						<h1>Rescuers Seek Survivors in Turkish Mine Disaster</h1>
+						<p></p>
+					</div>
+				</li>
+				<li>
+					<img src="images/051314.jpg">
+					<h1>May 13, 2014</h1>
+					<div class="detial">
+						<h1>De Blasio Looks Toward Sweden for Road Safety</h1>
+						<p></p>
+					</div>
+				</li>
+				<li>
+					<img src="images/051214.jpg">
+					<h1>May 12, 2014</h1>
+					<div class="detial">
+						<h1>Charters, Public Schools and a Chasm Between</h1>
+						<p></p>
+					</div>
+				</li>
+				<li>
+					<img src="images/051114.jpg">
+					<h1>May 11, 2014</h1>
+					<div class="detial">
+						<h1>Where Paper Real Estate Records Still Rule</h1>
+					</div>
+				</li>
+				<li>
+					<img src="images/051014.jpg">
+					<h1>May 10, 2014</h1>
+					<div class="detial">
+						<h1>In ‘Ceremonial Transfer,’ Remains of 9/11 Victims Are Moved to Memorial</h1>
+					</div>
+				</li>
+				<li>
+					<img src="images/050714.jpg">
+					<h1>May 7, 2014</h1>
+					<div class="detial">
+						<h1>An Open Garage, a Dead Exchange Student, and a New Debate on Self-Defense</h1>
+						<h1>Montana Homeowner Shoots German Teenager</h1>
+					</div>
+				</li>
+				<li>
+					<img src="images/050514.jpg">
+					<h1>May 5, 2014</h1>
+					<div class="detial">
+						<h1>On Staten Island, Rising Tide of Heroin Takes Hold</h1>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="control">
+		<span class="pre">&#60;</span>
+		<span class="next">&#62;</span>
+	</div>
+</body>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+	// the reposition
+	$('ul li img').wrap("<div class='image'>","</div>");
+
+	var windowsHeight, divHeight,imgCenter, singleWidth, NsingleWidth, listedItems,slideWidth,LslideWidth,NL;
+	function wrapVCenter(){
+		windowsHeight = $(window).height();
+		divHeight = $('ul li').height();
+		imgCenter = windowsHeight/2 - divHeight/2;
+		$('.wrapper').css('margin-top',imgCenter);
+	}
+
+	// the slider
+	var singleWidth = $('ul li').width();
+	var NsingleWidth = -singleWidth;
+	var listedItems = $('ul li').size();
+	var slideWidth = singleWidth * listedItems;
+	var LslideWidth = slideWidth - singleWidth;
+	var NLslideWidth = - LslideWidth;
+	
+		$('ul').css('width',slideWidth);
+	
+	var windowsWidth, contentLeft;
+
+	function wrapHCenter(){
+		windowsWidth = $(window).width();
+		contentLeft = windowsWidth/2 - singleWidth/2;
+
+		$('.wrapper').css('width', windowsWidth);
+		$('.content').css('margin-left', contentLeft);
+	}
+
+	function lightboxSize(){
+		$('.detial').css({
+			'width': windowsWidth,
+			'min-height': windowsHeight
+		});
+	}
+
+	lightboxSize();
+	wrapVCenter();
+	wrapHCenter();
+
+	$(window).resize(function(){
+		wrapVCenter();
+		wrapHCenter();
+		lightboxSize();
+	})
+		var a;
+		var i = NsingleWidth;
+		$('.next').click(function(){
+			$('ul').css('margin-left', i);
+			if(i > NLslideWidth){
+				
+				i = i + NsingleWidth;
+
+				if( i < NsingleWidth ){
+					a = i + singleWidth;
+				}else if(i > NsingleWidth){
+					a= i - singleWidth;
+				}else{
+					a=0;
+				}
+			}
+		});
+
+		$('.pre').click(function(){	
+			$('ul').css('margin-left', a);
+
+			if( a < 0 && a > NLslideWidth){
+				a = a + singleWidth;
+				i = a + NsingleWidth;
+			}else{
+				a=0;
+				i = NsingleWidth; 
+			}
+				
+		})
+
+	// The lightbox
+
+
+	$('.image').click(function(){
+		lightboxSize();
+		$('.detial').wrapInner("<div class='main'>","</div>");
+		$('.detial img').unwrap();
+		$(this).parent().find('.detial').css('display','block');
+		$('.close').click(function(){
+			closePic();
+		})
+	})
+		
+	$("<div class='close'> X </div>").appendTo('.detial');
+
+	function closePic(){
+		$('.detial').css('display','none');
+	}
+
+</script>
+</html>

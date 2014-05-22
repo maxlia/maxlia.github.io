@@ -1,0 +1,17 @@
+*{margin: 0; padding: 0;}
+body{background: url('stardust.png'); font-family: 'Vollkorn', serif;}
+.wrapper{overflow: hidden;}
+.control{text-align: center; color: #FFFFFF;width: 100%;}
+.control span{font-size: 40px; cursor: pointer; margin: 0 10px; text-shadow:0 0 20px #666;}
+ul{list-style: none;}
+ul li img{width: 500px; }
+ul li{width: 350px; text-align: center; display: inline-block; margin: -2px;}
+.image{ width:300px; height: 300px; background-color:#000;-webkit-border-radius: 50%; /* Firefox 1-3.6 */ -moz-border-radius: 50%; /* Opera 10.5, IE 9, Safari 5, Chrome, Firefox 4, iOS 4, Android 2.1+ */ border-radius: 50%; overflow: hidden; box-shadow: 0 0 10px #333;}
+.detial{display: none; position: absolute; z-index: 1000; top: 0; left: 0; background: rgba(0,0,0,0.5);}
+.detial h1{font-size: 30px; color: #fff;}
+.close{color:#fff; cursor: pointer;}
+.main{width: 1000px; margin: 50px auto;}
+.main p{color: #fff;}
+h1{text-align: left; margin: 10px; font-weight: 400; font-style: italic; color: #222;}
+p{text-align: left; margin: 10px; color: #222;}
+/*.last{width: 650px; text-align: center; background-color: #E84D05; float: right;position: relative;}*/
